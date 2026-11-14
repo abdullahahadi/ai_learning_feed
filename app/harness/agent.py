@@ -1,4 +1,5 @@
 from app.profile.schema import LearningProfile
+from app.tools.web_search import WEB_SEARCH_TOOL
 from openai import OpenAI
 from dotenv import load_dotenv
 
@@ -8,6 +9,7 @@ client = OpenAI()
 
 
 class LearningAgent:
+    """Search the web for learning resources relevant to a learner profile."""
 
     def __init__(self, profile: LearningProfile):
         self.profile = profile
@@ -16,7 +18,7 @@ class LearningAgent:
         
 
     def run(self, user_input: str) -> str:
-
+        """Return web-search results for the supplied query."""
         profile_context = self.profile.model_dump_json(indent=2)
 
         response = client.responses.create(
@@ -36,9 +38,7 @@ class LearningAgent:
 
             input=user_input,
 
-            tools=[
-                {"type": "web_search"}
-            ],
+            tools=[WEB_SEARCH_TOOL],
             
         )
 
