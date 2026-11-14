@@ -1,7 +1,7 @@
 from app.profile.schema import LearningProfile
 from app.harness.agent import LearningAgent
 from app.curation.ranker import CurationEngine
-
+from app.delivery.telegram import TelegramSender
 
 def main():
     """Search for learning resources, curate them, and print the feed."""
@@ -39,24 +39,20 @@ def main():
     )
 
     agent = LearningAgent(profile=profile)
-
-    search_query = """
-    Find recent and valuable educational resources
-    about AI Engineering, AI Agents, and Python.
-
-    Prioritize practical tutorials and technical articles.
-    """
+    curator = CurationEngine(profile=profile)
 
     print("Searching the web...")
 
-    search_results = agent.run(search_query)
+  
+
+
+    search_results = agent.run("Find recent educational resources about AI Engineering.")
 
     if not search_results:
         raise ValueError("Web search returned no results.")
 
     print("Search completed.")
 
-    curator = CurationEngine(profile=profile)
 
     print("Curating content...")
 
@@ -65,34 +61,42 @@ def main():
         limit=profile.daily_content_limit,
     )
 
-    print("\n" + "=" * 50)
-    print("YOUR AI-CURATED LEARNING FEED")
-    print("=" * 50)
 
-    for index, topic in enumerate(feed.topics, start=1):
+    print("Sending feed to Telegram...")
 
-        print(f"\n{index}. {topic.title}")
+    telegram = TelegramSender()
+    telegram.send_feed(feed)
 
-        print(f"Description: {topic.description}")
+    print("Feed delivered successfully!")
+    
+    # print("\n" + "=" * 50)
+    # print("YOUR AI-CURATED LEARNING FEED")
+    # print("=" * 50)
 
-        print(f"Source: {topic.source}")
+    # for index, topic in enumerate(feed.topics, start=1):
 
-        print(f"URL: {topic.url}")
+    #     print(f"\n{index}. {topic.title}")
 
-        print(
-            f"Relevance: {topic.relevance_score}/10"
-        )
+    #     print(f"Description: {topic.description}")
 
-        print(
-            f"Learning Value: {topic.learning_value}/10"
-        )
+    #     print(f"Source: {topic.source}")
 
-        print(
-            f"Why recommended: "
-            f"{topic.reason_for_recommendation}"
-        )
+    #     print(f"URL: {topic.url}")
 
-        print("-" * 50)
+    #     print(
+    #         f"Relevance: {topic.relevance_score}/10"
+    #     )
+
+    #     print(
+    #         f"Learning Value: {topic.learning_value}/10"
+    #     )
+
+    #     print(
+    #         f"Why recommended: "
+    #         f"{topic.reason_for_recommendation}"
+    #     )
+
+    #     print("-" * 50)
 
 
 if __name__ == "__main__":
