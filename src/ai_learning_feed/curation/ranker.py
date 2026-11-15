@@ -1,8 +1,8 @@
 
 from openai import OpenAI
 
-from app.profile.schema import LearningProfile
-from app.curation.schema import CuratedFeed
+from ai_learning_feed.profile.schema import LearningProfile
+from ai_learning_feed.curation.schema import CuratedFeed
 
 client = OpenAI()
 

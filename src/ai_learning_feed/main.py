@@ -1,7 +1,7 @@
-from app.profile.schema import LearningProfile
-from app.harness.agent import LearningAgent
-from app.curation.ranker import CurationEngine
-from app.delivery.telegram import TelegramSender
+from ai_learning_feed.profile.schema import LearningProfile
+from ai_learning_feed.harness.agent import LearningAgent
+from ai_learning_feed.curation.ranker import CurationEngine
+from ai_learning_feed.delivery.telegram import TelegramSender
 
 def main():
     """Search for learning resources, curate them, and print the feed."""

@@ -1,5 +1,5 @@
-from app.profile.schema import LearningProfile
-from app.tools.web_search import WEB_SEARCH_TOOL
+from ai_learning_feed.profile.schema import LearningProfile
+from ai_learning_feed.tools.web_search import WEB_SEARCH_TOOL
 from openai import OpenAI
 from dotenv import load_dotenv
 
