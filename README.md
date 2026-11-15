@@ -4,19 +4,13 @@ AI Learning Feed searches the web for educational resources, curates and ranks t
 
 ## Requirements
 
-- Python
-- An OpenAI API key with access to the model configured in `app/harness/agent.py` and the web search tool
+- Python 3.14+ and `uv` to run locally, or Docker to run in a container
+- An OpenAI API key with access to the model configured in `src/ai_learning_feed/harness/agent.py` and the web search tool
 - A Telegram bot token and the destination chat ID
 
-## Setup
+## Configuration
 
-Install the project and its dependencies with `uv`:
-
-```powershell
-uv sync
-```
-
-Create a `.env` file in the project root:
+Create a `.env` file in the project root for either run option:
 
 ```dotenv
 OPENAI_API_KEY=your_api_key
@@ -26,12 +20,27 @@ TELEGRAM_CHAT_ID=your_chat_id
 
 The app loads these values from `.env` with `python-dotenv`. Keep your credentials private; `.env` is listed in `.gitignore`.
 
-## Run
+## Run locally with uv
 
-Run the installed command from the project root:
+Install the project and its dependencies, then run it from the project root:
 
 ```powershell
+uv sync
 uv run python -m ai_learning_feed.main
+```
+
+## Run with Docker
+
+Build the image from the project root:
+
+```powershell
+docker build -t ai-learning-feed .
+```
+
+Run the container with your `.env` file. The file is passed at runtime and is not included in the image:
+
+```powershell
+docker run --rm --env-file .env ai-learning-feed
 ```
 
 The app uses the sample learner profile and search query in `src/ai_learning_feed/main.py`. It searches the web, asks the model to curate the results into structured topics, ranks them by relevance and learning value, then sends the feed to the configured Telegram chat. It delivers up to the profile's `daily_content_limit`.
@@ -56,6 +65,8 @@ src/
     curation/
       ranker.py           # Curates, scores, ranks, and limits topics
       schema.py           # Structured curated feed and topic models
+Dockerfile                # Container image definition
+.dockerignore             # Files excluded from the Docker build context
 pyproject.toml            # Project metadata and dependencies
 uv.lock                   # Locked dependency versions
 ```
