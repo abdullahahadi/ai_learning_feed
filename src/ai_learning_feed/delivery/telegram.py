@@ -1,5 +1,5 @@
-
 import os
+
 import requests
 from dotenv import load_dotenv
 
@@ -7,7 +7,6 @@ load_dotenv()
 
 
 class TelegramSender:
-
     def __init__(self):
         self.token = os.getenv("TELEGRAM_BOT_TOKEN")
         self.chat_id = os.getenv("TELEGRAM_CHAT_ID")
@@ -15,19 +14,12 @@ class TelegramSender:
         if not self.token or not self.chat_id:
             raise ValueError("Telegram credentials are missing.")
 
-        self.api_url = (
-            f"https://api.telegram.org/bot{self.token}/sendMessage"
-        )
+        self.api_url = f"https://api.telegram.org/bot{self.token}/sendMessage"
 
     def send_message(self, message: str):
 
         response = requests.post(
-            self.api_url,
-            json={
-                "chat_id": self.chat_id,
-                "text": message
-            },
-            timeout=15
+            self.api_url, json={"chat_id": self.chat_id, "text": message}, timeout=15
         )
 
         response.raise_for_status()
@@ -46,7 +38,6 @@ class TelegramSender:
         self.send_message(header)
 
         for index, topic in enumerate(feed.topics, start=1):
-
             message = (
                 f"📚 {index}. {topic.title}\n\n"
                 f"{topic.description}\n\n"

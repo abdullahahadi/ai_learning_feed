@@ -1,7 +1,8 @@
+from dotenv import load_dotenv
+from openai import OpenAI
+
 from ai_learning_feed.profile.schema import LearningProfile
 from ai_learning_feed.tools.web_search import WEB_SEARCH_TOOL
-from openai import OpenAI
-from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -14,8 +15,6 @@ class LearningAgent:
     def __init__(self, profile: LearningProfile):
         self.profile = profile
         self.model = "gpt-6-luna"
-
-        
 
     def run(self, user_input: str) -> str:
         """Return web-search results for the supplied query."""
@@ -35,11 +34,8 @@ class LearningAgent:
             Prioritize relevant, high-quality educational
             content matching the user's goals.
             """,
-
             input=user_input,
-
             tools=[WEB_SEARCH_TOOL],
-            
         )
 
         return response.output_text
