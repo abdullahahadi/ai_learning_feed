@@ -1,8 +1,8 @@
 
 from openai import OpenAI
 
-from app.profile.schema import LearningProfile
-from app.curation.schema import CuratedFeed
+from ai_learning_feed.profile.schema import LearningProfile
+from ai_learning_feed.curation.schema import CuratedFeed
 
 client = OpenAI()
 
@@ -28,7 +28,7 @@ class CurationEngine:
             model=self.model,
 
             instructions=f"""
-            You are an expert AI learning curator.
+            You are an expert Python learning curator.
 
             USER PROFILE:
             {profile_context}
