@@ -24,7 +24,7 @@ class LearningAgent:
         response = client.responses.create(
             model=self.model,
             instructions=f"""
-            You are a personalized AI learning curator.
+            You are a personalized Python learning curator.
 
             Use the following user profile to personalize
             your research and recommendations.

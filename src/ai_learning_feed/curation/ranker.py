@@ -28,7 +28,7 @@ class CurationEngine:
             model=self.model,
 
             instructions=f"""
-            You are an expert AI learning curator.
+            You are an expert Python learning curator.
 
             USER PROFILE:
             {profile_context}

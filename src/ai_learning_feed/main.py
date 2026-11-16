@@ -9,21 +9,21 @@ def main():
         background="Software Developer",
 
         interests=[
-            "AI Engineering",
             "Python",
-            "Backend Development",
-            "Data Engineering",
+            "Python project setup",
+            "UV",
+            "pre-commit",
         ],
 
         goals=[
-            "Become a better AI Engineer",
-            "Build AI-powered applications",
-            "Learn practical AI concepts",
+            "Become a better Python Developer",
+            "Build Python-powered applications",
+            "Learn practical Python concepts",
         ],
 
         current_level={
             "Python": "Intermediate",
-            "AI Engineering": "Beginner",
+            "Python Scripting": "Beginner",
             "Backend Development": "Intermediate",
         },
 
@@ -31,6 +31,7 @@ def main():
             "Practical examples",
             "Step-by-step tutorials",
             "Technical articles",
+            "YouTube videos"
         ],
 
         excluded_topics=[],
@@ -46,7 +47,7 @@ def main():
   
 
 
-    search_results = agent.run("Find recent educational resources about AI Engineering.")
+    search_results = agent.run("Find recent educational resources about Python.")
 
     if not search_results:
         raise ValueError("Web search returned no results.")
@@ -68,35 +69,6 @@ def main():
     telegram.send_feed(feed)
 
     print("Feed delivered successfully!")
-    
-    # print("\n" + "=" * 50)
-    # print("YOUR AI-CURATED LEARNING FEED")
-    # print("=" * 50)
-
-    # for index, topic in enumerate(feed.topics, start=1):
-
-    #     print(f"\n{index}. {topic.title}")
-
-    #     print(f"Description: {topic.description}")
-
-    #     print(f"Source: {topic.source}")
-
-    #     print(f"URL: {topic.url}")
-
-    #     print(
-    #         f"Relevance: {topic.relevance_score}/10"
-    #     )
-
-    #     print(
-    #         f"Learning Value: {topic.learning_value}/10"
-    #     )
-
-    #     print(
-    #         f"Why recommended: "
-    #         f"{topic.reason_for_recommendation}"
-    #     )
-
-    #     print("-" * 50)
 
 
 if __name__ == "__main__":
