@@ -1,3 +1,1 @@
-WEB_SEARCH_TOOL = {
-    "type": "web_search"
-}
+WEB_SEARCH_TOOL = {"type": "web_search"}

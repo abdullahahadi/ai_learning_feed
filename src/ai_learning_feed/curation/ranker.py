@@ -1,8 +1,7 @@
-
 from openai import OpenAI
 
-from ai_learning_feed.profile.schema import LearningProfile
 from ai_learning_feed.curation.schema import CuratedFeed
+from ai_learning_feed.profile.schema import LearningProfile
 
 client = OpenAI()
 
@@ -14,19 +13,12 @@ class CurationEngine:
         self.profile = profile
         self.model = "gpt-6-luna"
 
-    def curate(
-        self,
-        search_results: str,
-        limit: int = 5
-    ) -> CuratedFeed:
+    def curate(self, search_results: str, limit: int = 5) -> CuratedFeed:
         """Curate search results and return at most ``limit`` ranked topics."""
-        profile_context = self.profile.model_dump_json(
-            indent=2
-        )
+        profile_context = self.profile.model_dump_json(indent=2)
 
         response = client.responses.parse(
             model=self.model,
-
             instructions=f"""
             You are an expert Python learning curator.
 
@@ -48,7 +40,6 @@ class CurationEngine:
 
             Return the most valuable topics.
             """,
-
             input=f"""
             Evaluate and curate these search results.
 
@@ -57,7 +48,6 @@ class CurationEngine:
             SEARCH RESULTS:
             {search_results}
             """,
-
             text_format=CuratedFeed,
         )
 
@@ -69,8 +59,7 @@ class CurationEngine:
         feed.topics.sort(
             key=lambda topic: (
                 # Relevance carries more weight than learning value.
-                topic.relevance_score * 0.6
-                + topic.learning_value * 0.4
+                topic.relevance_score * 0.6 + topic.learning_value * 0.4
             ),
             reverse=True,
         )
