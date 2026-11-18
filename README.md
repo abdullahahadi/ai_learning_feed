@@ -29,6 +29,14 @@ uv sync
 uv run python -m ai_learning_feed.main
 ```
 
+## Type checking
+
+The project uses [ty](https://docs.astral.sh/ty/) to check type hints without running the code:
+
+```powershell
+uv run ty check
+```
+
 ## Pre-commit hooks
 
 Install the Git hooks with:
