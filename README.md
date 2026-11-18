@@ -29,6 +29,16 @@ uv sync
 uv run python -m ai_learning_feed.main
 ```
 
+## Pre-commit hooks
+
+Install the Git hooks with:
+
+```powershell
+uv run pre-commit install
+```
+
+The hooks keep `uv.lock` up to date, run Ruff checks with `--fix`, and format code with Ruff.
+
 ## Run with Docker
 
 Build the image from the project root:

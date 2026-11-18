@@ -4,7 +4,7 @@ from ai_learning_feed.delivery.telegram import TelegramSender
 from ai_learning_feed.profile.schema import LearningProfile
 
 
-def main():
+def main(a):
     """Search for learning resources, curate them, and print the feed."""
     profile = LearningProfile(
         background="Software Developer",
