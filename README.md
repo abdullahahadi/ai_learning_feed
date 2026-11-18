@@ -37,6 +37,16 @@ The project uses [ty](https://docs.astral.sh/ty/) to check type hints without ru
 uv run ty check
 ```
 
+## Pre-commit hooks
+
+Install the Git hooks with:
+
+```powershell
+uv run pre-commit install
+```
+
+The hooks keep `uv.lock` up to date, run Ruff checks with `--fix`, and format code with Ruff.
+
 ## Run with Docker
 
 Build the image from the project root:
