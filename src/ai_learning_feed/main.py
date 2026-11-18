@@ -4,7 +4,7 @@ from ai_learning_feed.harness.agent import LearningAgent
 from ai_learning_feed.profile.schema import LearningProfile
 
 
-def main(a):
+def main():
     """Search for learning resources, curate them, and print the feed."""
     profile = LearningProfile(
         background="Software Developer",

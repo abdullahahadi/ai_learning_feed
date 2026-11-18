@@ -37,7 +37,7 @@ Install the Git hooks with:
 uv run pre-commit install
 ```
 
-The hooks keep `uv.lock` up to date, run Ruff checks with `--fix`, and format code with Ruff.
+The hooks keep `uv.lock` up to date, run Ruff checks with `--fix`, format code with Ruff, and check project types with Ty.
 
 ## Run with Docker
 
