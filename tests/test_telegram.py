@@ -62,7 +62,9 @@ def test_send_message_propagates_http_error(monkeypatch):
         TelegramSender().send_message("hello")
 
 
-def test_send_feed_sends_header_and_formatted_topics(monkeypatch, curated_feed, curated_topic):
+def test_send_feed_sends_header_and_formatted_topics(
+    monkeypatch, curated_feed, curated_topic
+):
     monkeypatch.setenv("TELEGRAM_BOT_TOKEN", "test-token")
     monkeypatch.setenv("TELEGRAM_CHAT_ID", "1234")
     sender = TelegramSender()

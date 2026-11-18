@@ -1,6 +1,5 @@
 import logging
 
-from ai_learning_feed.harness.agent import LearningAgent
 from ai_learning_feed.curation.ranker import CurationEngine
 from ai_learning_feed.delivery.telegram import TelegramSender
 from ai_learning_feed.harness.agent import LearningAgent
