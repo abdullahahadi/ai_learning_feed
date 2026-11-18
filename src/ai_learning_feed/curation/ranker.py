@@ -1,7 +1,10 @@
+from dotenv import load_dotenv
 from openai import OpenAI
 
 from ai_learning_feed.curation.schema import CuratedFeed
 from ai_learning_feed.profile.schema import LearningProfile
+
+load_dotenv()
 
 client = OpenAI()
 
