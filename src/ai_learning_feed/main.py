@@ -1,11 +1,21 @@
+import logging
+
+from ai_learning_feed.harness.agent import LearningAgent
 from ai_learning_feed.curation.ranker import CurationEngine
 from ai_learning_feed.delivery.telegram import TelegramSender
 from ai_learning_feed.harness.agent import LearningAgent
 from ai_learning_feed.profile.schema import LearningProfile
 
+logger = logging.getLogger(__name__)
 
-def main(a):
-    """Search for learning resources, curate them, and print the feed."""
+
+def main():
+    """Search for learning resources, curate them, and deliver the feed to Telegram."""
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s %(levelname)s %(name)s: %(message)s",
+    )
+
     profile = LearningProfile(
         background="Software Developer",
         interests=[
@@ -37,28 +47,28 @@ def main(a):
     agent = LearningAgent(profile=profile)
     curator = CurationEngine(profile=profile)
 
-    print("Searching the web...")
+    logger.info("Searching the web...")
 
     search_results = agent.run("Find recent educational resources about Python.")
 
     if not search_results:
         raise ValueError("Web search returned no results.")
 
-    print("Search completed.")
+    logger.info("Search completed.")
 
-    print("Curating content...")
+    logger.info("Curating content...")
 
     feed = curator.curate(
         search_results=search_results,
         limit=profile.daily_content_limit,
     )
 
-    print("Sending feed to Telegram...")
+    logger.info("Sending feed to Telegram...")
 
     telegram = TelegramSender()
     telegram.send_feed(feed)
 
-    print("Feed delivered successfully!")
+    logger.info("Feed delivered successfully!")
 
 
 if __name__ == "__main__":
