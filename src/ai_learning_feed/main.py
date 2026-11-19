@@ -1,48 +1,16 @@
 import logging
 
-from ai_learning_feed.harness.agent import LearningAgent
 from ai_learning_feed.curation.ranker import CurationEngine
 from ai_learning_feed.delivery.telegram import TelegramSender
 from ai_learning_feed.harness.agent import LearningAgent
-from ai_learning_feed.profile.schema import LearningProfile
+from ai_learning_feed.profile.sample import build_sample_profile
 
 logger = logging.getLogger(__name__)
 
 
 def main():
-    """Search for learning resources, curate them, and deliver the feed to Telegram."""
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s %(levelname)s %(name)s: %(message)s",
-    )
-
-    profile = LearningProfile(
-        background="Software Developer",
-        interests=[
-            "Python",
-            "Python project setup",
-            "UV",
-            "pre-commit",
-        ],
-        goals=[
-            "Become a better Python Developer",
-            "Build Python-powered applications",
-            "Learn practical Python concepts",
-        ],
-        current_level={
-            "Python": "Intermediate",
-            "Python Scripting": "Beginner",
-            "Backend Development": "Intermediate",
-        },
-        preferred_learning_style=[
-            "Practical examples",
-            "Step-by-step tutorials",
-            "Technical articles",
-            "YouTube videos",
-        ],
-        excluded_topics=[],
-        daily_content_limit=5,
-    )
+    """Search for learning resources, curate them, and print the feed."""
+    profile = build_sample_profile()
 
     agent = LearningAgent(profile=profile)
     curator = CurationEngine(profile=profile)
