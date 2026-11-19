@@ -2,6 +2,10 @@
 
 AI Learning Feed searches the web for educational resources, curates and ranks them for a learner profile, then delivers the results through a Telegram bot.
 
+## Architecture
+
+The target design, the rules that keep its parts separate, and the roadmap are described in [docs/architecture.md](docs/architecture.md).
+
 ## Requirements
 
 - Python 3.14+ and `uv` to run locally, or Docker to run in a container
