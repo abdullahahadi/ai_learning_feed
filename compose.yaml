@@ -1,0 +1,51 @@
+services:
+  search:
+    build: .
+    command:
+      - python
+      - -m
+      - ai_learning_feed.pipeline.search
+      - --output
+      - /data/search_results.txt
+    environment:
+      OPENAI_API_KEY: "${OPENAI_API_KEY:?Set OPENAI_API_KEY in the project .env file}"
+    volumes:
+      - pipeline-data:/data
+
+  curate:
+    build: .
+    command:
+      - python
+      - -m
+      - ai_learning_feed.pipeline.curate
+      - --input
+      - /data/search_results.txt
+      - --output
+      - /data/curated_feed.json
+    environment:
+      OPENAI_API_KEY: "${OPENAI_API_KEY:?Set OPENAI_API_KEY in the project .env file}"
+    volumes:
+      - pipeline-data:/data
+    depends_on:
+      search:
+        condition: service_completed_successfully
+
+  deliver:
+    build: .
+    command:
+      - python
+      - -m
+      - ai_learning_feed.pipeline.deliver
+      - --input
+      - /data/curated_feed.json
+    environment:
+      TELEGRAM_BOT_TOKEN: "${TELEGRAM_BOT_TOKEN:?Set TELEGRAM_BOT_TOKEN in the project .env file}"
+      TELEGRAM_CHAT_ID: "${TELEGRAM_CHAT_ID:?Set TELEGRAM_CHAT_ID in the project .env file}"
+    volumes:
+      - pipeline-data:/data
+    depends_on:
+      curate:
+        condition: service_completed_successfully
+
+volumes:
+  pipeline-data:
