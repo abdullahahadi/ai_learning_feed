@@ -2,6 +2,7 @@ import argparse
 from pathlib import Path
 
 from ai_learning_feed.harness.agent import LearningAgent
+from ai_learning_feed.logging_config import configure_logging
 from ai_learning_feed.profile.sample import build_sample_profile
 
 DEFAULT_QUERY = "Find recent educational resources about Python."
@@ -21,6 +22,7 @@ def run_search(query: str, output_path: Path) -> None:
 
 
 def main() -> None:
+    configure_logging()
     parser = argparse.ArgumentParser(description="Search for learning resources.")
     parser.add_argument("--query", default=DEFAULT_QUERY)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)

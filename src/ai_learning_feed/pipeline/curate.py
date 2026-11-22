@@ -2,6 +2,7 @@ import argparse
 from pathlib import Path
 
 from ai_learning_feed.curation.ranker import CurationEngine
+from ai_learning_feed.logging_config import configure_logging
 from ai_learning_feed.profile.sample import build_sample_profile
 
 DEFAULT_INPUT = Path("data/search_results.txt")
@@ -22,6 +23,7 @@ def run_curation(input_path: Path, output_path: Path) -> None:
 
 
 def main() -> None:
+    configure_logging()
     parser = argparse.ArgumentParser(description="Curate search results into a feed.")
     parser.add_argument("--input", type=Path, default=DEFAULT_INPUT)
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
